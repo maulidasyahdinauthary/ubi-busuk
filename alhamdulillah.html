@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uthary Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Permanent+Marker&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6e6ff; /* Ungu Muda */
+            color: #4b0082; /* Indigo */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .header {
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            background-color: #d8bfd8; /* Thistle */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #9370db; /* Medium Purple */
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+            color: #9400d3; /* Dark Violet */
+            margin-bottom: 0;
+            font-family: "Permanent Marker", sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin-left: 10px;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: #4b0082; /* Indigo */
+            text-decoration: none;
+            padding: 6px 10px;
+            border: 2px solid #8a2be2; /* Blue Violet */
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+            font-size: 0.9em;
+            display: block;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .header-nav a:hover {
+            background-color: #8a2be2; /* Blue Violet */
+            color: #fff;
+        }
+
+        .login-form,
+        .register-form,
+        .call-center-form,
+        .report-form {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: #d8bfd8; /* Thistle */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .call-center-form {
+            right: 250px;
+        }
+
+        .report-form {
+            right: 250px;
+            /* Menyesuaikan agar tidak tumpang tindih */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #9400d3; /* Dark Violet */
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #9370db; /* Medium Purple */
+            border-radius: 4px;
+            background-color: #fff;
+            color: #4b0082; /* Indigo */
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #8a2be2; /* Blue Violet */
+            outline: none;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background-color: #8a2be2; /* Blue Violet */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #9400d3; /* Dark Violet */
+        }
+
+        .register-link {
+            margin-top: 15px;
+            font-size: 0.9em;
+            display: block;
+            text-align: left;
+            color: #8a2be2; /* Blue Violet */
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quote-row {
+            display: flex;
+            justify-content: center;
+            /* Mengubah agar quote berada di tengah */
+            margin-bottom: 20px;
+        }
+
+        .quote-container {
+            background-color: #d8bfd8; /* Thistle */
+            padding: 20px;
+            border: 5px solid #8a2be2; /* Blue Violet */
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            /* Mengubah lebar container */
+            box-sizing: border-box;
+        }
+
+        .quote {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #4b0082; /* Indigo */
+            letter-spacing: 1px;
+        }
+
+        .author {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9em;
+            color: #9400d3; /* Dark Violet */
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #4b0082; /* Indigo */
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #8a2be2; /* Blue Violet */
+        }
+
+        /* Gaya Video */
+        #video-section {
+            padding: 30px;
+            text-align: center;
+            display: none; /* Sembunyikan section video secara default */
+        }
+
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .youtube-video {
+            position: relative;
+            width: 80%;
+            /* Lebar video diperbesar */
+            height: 450px;
+            /* Tinggi video diperbesar */
+            margin: 10px auto;
+            /* Membuat video berada di tengah */
+            border: 1px solid #9370db; /* Medium Purple */
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #youtube-iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Media query untuk layar yang lebih kecil */
+        @media (max-width: 600px) {
+            .youtube-video {
+                width: 95%;
+                height: 250px;
+            }
+
+            .quote-container {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .quote-row {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .announcement {
+            background-color: #9370db; /* Medium Purple */
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .announcement a {
+            color: #9400d3; /* Dark Violet */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-button {
+            align-self: flex-start;
+            margin-top: 10px;
+            margin-right: 20px;
+            display: none;
+        }
+
+        .login-button a {
+            background-color: #d8bfd8; /* Thistle */
+            color: #9400d3; /* Dark Violet */
+            padding: 8px 12px;
+            border: 2px solid #9400d3; /* Dark Violet */
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-button a:hover {
+            background-color: #9400d3; /* Dark Violet */
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="announcement">
+        Dirancang oleh Maulida Syahdina Uthary(XII 3.2)
+    </div>
+    <header class="header">
+        <h1>Utharyyyy Blog</h1>
+        <nav class="header-nav">
+            <a href="#" onclick="showHome()">Beranda</a>
+            <a href="#" onclick="showVideo()">Konten</a>
+            <a href="#" id="login-link">Login</a>
+            <a href="#" id="call-center-link">Call Center</a>
+            <a href="#" id="report-link">Call Center 2</a>
+        </nav>
+        <div class="login-button">
+            <a href="#">Login</a>
+        </div>
+    </header>
+    <div id="home-section" class="content">
+        <h1>Selamat Datang Teman-Teman!</h1>
+	<img src="ubi-ungu.jpeg.jpeg" alt="Lumpia Ubi Ungu" width="300">
+        <p>Haloo teman-teman, kenalin aku Tari. Sekarang aku duduk di kelas XII di Smansa Selayar. Aku Percaya Setiap Hari Selalu Punya Alasan Untuk disyukuri.
+            Profil Ini Jadi Tempatku Menyimpan Momen,Cerita,dan Hal-Hal Random Yang
+            Mungkin Juga Bisa Jadi Energi Positif Buat Kamu dan Menjadi Satu Hal Untuk Kamu Tersenyum Dengan Membuat Lumpia Ubi
+            Ungu</p>
+        <div class="quote-row">
+            <div class="quote-container">
+                <p class="quote">"Halo kamu, semoga nemuin sesuatu yang bikin harimu lebih baik lebih baik di sini."</p>
+                <p class="author">- Steve Jobs</p>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href=""><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@utharyyy?_t=ZS-8zcjF9axLTb&_r=1" target="_blank"><i
+                    class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/utharymaulida?igsh=MXV4bGY0aTlnaWgwcQ=="><i
+                    class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div id="video-section">
+        <h2>Video Saya</h2>
+        <div class="video-container">
+            <div class="youtube-video">
+                <iframe id="youtube-iframe1" width="100%" height="100%"
+                    src="https://www.youtube.com/embed/dI5IIKZ6CVQ?autoplay=1&mute=1" title="Proses Pembuatan Lumpia Ubi Ungu"
+                    frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Maulida Syahdina Uthary</p>
+    </footer>
+
+    <div class="login-form" id="login-form">
+        <h2>Login</h2>
+        <form>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <a href="#" id="register-link" class="register-link">Jika belum memiliki akun, daftar di sini</a>
+        </form>
+    </div>
+
+    <div class="call-center-form" id="call-center-form">
+        <h2>Hubungi Kami</h2>
+        <form>
+            <div class="form-group">
+                <label for="cc-username">Username:</label>
+                <input type="text" id="cc-username" name="cc-username">
+            </div>
+            <div class="form-group">
+                <label for="cc-email">Email:</label>
+                <input type="email" id="cc-email" name="cc-email">
+            </div>
+            <div class="form-group">
+                <label for="cc-message">Pesan Anda:</label>
+                <textarea id="cc-message" name="cc-message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn">Kirim Pesan</button>
+        </form>
+    </div>
+
+    <div class="report-form" id="report-form">
+        <h2>Call Center 2</h2>
+        <form action="latihan form.php" method="post">
+            <fieldset>
+                <legend>Date Cek Url</legend>
+                <div class="form-group">
+                    <label for="url">Masukkan Alamat Web:</label>
+                    <input type="url" id="url" name="url" placeholder="Masukan Alamat Web">
+                </div>
+                <div class="form-group">
+                    <label for="tanggal">Tanggal Cek:</label>
+                    <input type="date" id="tanggal" name="tanggal">
+                </div>
+                <div class="form-group">
+                    <label for="jumlah">Jumlah Pengunjung:</label>
+                    <input type="number" id="jumlah" name="jumlah" min="1" max="100">
+                </div>
+                <button type="submit" class="btn">Kirim</button>
+                <button type="reset" class="btn">Hapus</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="register-form" id="register-form">
+        <h2>Daftar</h2>
+        <form>
+            <div class="form-group">
+                <label for="reg-username">Username:</label>
+                <input type="text" id="reg-username" name="reg-username">
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email:</label>
+                <input type="email" id="reg-email" name="reg-email">
+            </div>
+            <div class="form-group">
+                <label for="reg-gender">Jenis Kelamin:</label>
+                <select id="reg-gender" name="reg-gender">
+                    <option value="pria">Pria</option>
+                    <option value="wanita">Wanita</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" name="reg-password">
+            </div>
+            <button type="submit" class="btn">Daftar</button>
+        </form>
+    </div>
+
+    <script>
+        function showHome() {
+            document.getElementById('home-section').style.display = 'block';
+            document.getElementById('video-section').style.display = 'none';
+        }
+
+        function showVideo() {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('video-section').style.display = 'block';
+        }
+
+        showHome();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginLink = document.getElementById('login-link');
+            const loginForm = document.getElementById('login-form');
+            const registerLink = document.getElementById('register-link');
+            const registerForm = document.getElementById('register-form');
+            const callCenterLink = document.getElementById('call-center-link');
+            const callCenterForm = document.getElementById('call-center-form');
+            const reportLink = document.getElementById('report-link');
+            const reportForm = document.getElementById('report-form');
+
+            loginLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+                registerForm.style.display = 'none';
+                callCenterForm.style.display = 'none';
+                reportForm.style.display = 'none';
+            });
+
+            registerLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                callCenterForm.style.display = 'none';
+                reportForm.style.display = 'none';
+            });
+
+            callCenterLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                callCenterForm.style.display = callCenterForm.style.display === 'none' ? 'block' : 'none';
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'none';
+                reportForm.style.display = 'none';
+            });
+
+            reportLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                reportForm.style.display = reportForm.style.display === 'none' ? 'block' : 'none';
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'none';
+                callCenterForm.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+        <h3>Langkah Membuat Lumpia Ubi Ungu:</h3>
+        <ol style="text-align:left; display:inline-block;">
+            <li>Siapkan bahan-bahan seperti ubi ungu, kulit lumpia, gula, dan keju.</li>
+            <li>Haluskan ubi ungu dan campur dengan bahan lainnya.</li>
+            <li>Masukkan adonan ke kulit lumpia dan gulung rapi.</li>
+            <li>Goreng hingga berwarna keemasan.</li>
+            <li>Sajikan dengan taburan keju atau coklat leleh.</li>
+        </ol>
+
+        <h3>Bahan-bahan yang Dibutuhkan:</h3>
+        <ul style="text-align:left; display:inline-block;">
+            <li>Ubi ungu</li>
+            <li>Gula pasir</li>
+            <li>Keju parut</li>
+            <li>Kulit lumpia</li
+
+<h3>Daftar Harga Sweet Potato Meltzz</h3>
+<table border="1" cellspacing="0" cellpadding="8" 
+       style="margin:auto; border-collapse:collapse; text-align:center; background-color:#d8bfd8; color:#4b0082; width:80%;">
+    <tr style="background-color:#9370db; color:white;">
+        <th>No</th>
+        <th>Jenis</th>
+        <th>Keterangan</th>
+        <th>Harga (Rp)</th>
+    </tr>
+
+    <!-- Original -->
+    <tr>
+        <td>1</td>
+        <td>Original</td>
+        <td>1 pcs</td>
+        <td>4.000</td>
+    </tr>
+
+    <!-- 1 Varian rasa -->
+    <tr style="background-color:#eee5f7;">
+        <td>2</td>
+        <td>1 Varian Rasa (Coklat/Keju)</td>
+        <td>1 pcs</td>
+        <td>5.000</td>
+    </tr>
+    <tr style="background-color:#eee5f7;">
+        <td></td>
+        <td></td>
+        <td>2 pcs</td>
+        <td>9.000</td>
+    </tr>
+    <tr style="background-color:#eee5f7;">
+        <td></td>
+        <td></td>
+        <td>3 pcs</td>
+        <td>14.000</td>
+    </tr>
+
+    <!-- Mix varian rasa -->
+    <tr>
+        <td>3</td>
+        <td>Mix Varian Rasa (Coklat + Keju)</td>
+        <td>2 pcs</td>
+        <td>12.000</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>3 pcs</td>
+        <td>15.000</td>
+    </tr>
+</table>
+
+<p style="text-align:center; margin-top:10px; font-style:italic; color:#4b0082;">
+    *Untuk request lain, silakan hubungi nomor di bawah ini:<br>
+    <b>0821-5427-8097</b>
+</p>
